@@ -1,20 +1,18 @@
 import React from 'react';   // 核心库
 import ReactDOM from 'react-dom'; // DOM渲染库
 
-// 当你map的时候，是把一个字符串数组映射为了一个li的React元素数组
-// 在列表中的每一个子元素都应该有一个唯一的key属性
-// 原因是为了高效的dom  diff
-let names = ['zhangsan', 'lisi', 'wangwu']
-let elements = names.map((item, index) => <li key={item}>{item}</li>)
+/**
+ * React元素都是不可变对象
+ * React只会更新必要的部分
+ * 如果说新老的虚拟DOM是一样的则不做任何改变
+ */
 
-ReactDOM.render(
-  <ul>{elements}</ul>,
-  document.getElementById('root')
-)
+ function tick() {
+   const element = <div><p>时间</p>{new Date().toLocaleTimeString()}</div>
 
-let elements2 = names.reverse().map((item, index) => <li key={item}>{item}</li>)
+    ReactDOM.render(
+      element, document.getElementById('root')
+    )
+ }
 
-ReactDOM.render(
-  <ul>{elements2}</ul>,
-  document.getElementById('root')
-)
+ setInterval(tick, 1000)
