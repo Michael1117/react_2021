@@ -1,6 +1,5 @@
 import React from 'react';   // 核心库
 import ReactDOM from 'react-dom'; // DOM渲染库
-import './index.css';
 
 /**
  * 
@@ -23,7 +22,7 @@ import './index.css';
 );
  */
 
-function createElement(type, config = {}, ...children) {
+/* function createElement(type, config = {}, ...children) {
   return {
     //$$typeof: Symbol.for('react.element'),
     type,
@@ -33,4 +32,12 @@ function createElement(type, config = {}, ...children) {
 
  let element = createElement('h1', {id: 'title'}, 'hello', createElement('h2', null, 'world'))
 
- console.log(element)
+ console.log(element) */
+
+ let name = 'Michael'
+ let element = <h1 id="title">hello {name}</h1>
+
+ ReactDOM.render(
+   element,
+   document.getElementById('root')
+ )
