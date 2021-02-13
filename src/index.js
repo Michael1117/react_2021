@@ -75,7 +75,7 @@ let props = {
   ],
 };
 
-let element = <Person {...props} />;
+// let element = <Person {...props} />;
 // 1. 拿到 props
 let componentInstance = new Person(props);
 let propTypes = Person.propTypes;
