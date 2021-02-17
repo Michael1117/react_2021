@@ -1,43 +1,37 @@
-/* import React from "./react"; // 核心库
-import ReactDOM from "./react-dom"; // DOM渲染库
+import React from "react";
+import ReactDom from "react-dom";
 
+/**
+ * 组件的状态
+ * 组件数据源有1个是属性  是父组件给子组件的  不可修改
+ * 另一个就是状态  是内部初始化的， 改变状态的唯一方式就是setState
+ * 属性和状态都可以影响视图，他们改变了都会引起视图的更新
+ */
 
-let element = React.createElement("h1", {
-  className: 'title',
-  style: {
-    color: 'red'
+class Clock extends React.Component {
+  state = { date: new Date() }  // 两种定义初始状态的方式
+  constructor(props) {
+    super(props); // this.props = props;
+    //this.state = { date: new Date() };
+    // 其它地方要改变只能调用setState
   }
-}, "hello", React.createElement("span", null, "world"))
+  componentWillMount() {
+    // 组件将要挂载
+  }
 
-ReactDOM.render(element, document.getElementById('root')) */
-import React from "./react";
-import ReactDom from "./react-dom"
-
-
-/* function Welcome() {
-  return React.createElement("h1", {
-    className: 'title',
-    style: {
-      color: 'red',
-      fontSize: '50px'
-    }
-  }, 'hello', React.createElement("span", null, "world"))
-} */
-
-class Welcome extends React.Component {
+  componentDidMount() {
+    // 组件挂载完成
+    this.timer = setInterval(() => {
+      this.setState({ date: new Date() });
+    }, 1000);
+  }
   render() {
-    return React.createElement("h1", {
-      className: 'title',
-      style: {
-        color: 'red',
-        fontSize: '50px'
-      }
-    }, 'hello1', React.createElement("span", null, "world"))
+    return (
+      <div>
+        <h1>Hello World</h1>
+        <h2>当前的时间为： {this.state.date.toLocaleTimeString()}</h2>
+      </div>
+    );
   }
 }
-//let element = <Welcome/>
-// createElement的类型可能是一个函数，也可以是一个字符串。原生DOM是字符串，类组件和函数  是function
-let element = React.createElement(Welcome, {});
-console.log(element)
-
-ReactDom.render(element, document.getElementById('root'))
+ReactDom.render(<Clock />, document.getElementById("root"));

@@ -7,6 +7,10 @@ export class Component{
     static isReactComponent = true;     // 是一个组件
     constructor(props) {
         this.props = props
+    }   
+    // 部分状态
+    setState(partialState) {
+
     }
 }
 
