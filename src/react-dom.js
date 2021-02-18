@@ -3,7 +3,19 @@ function render(element, container) {
     return container.appendChild(document.createTextNode(element));
   }
 
-  let { type, props } = element;
+  let type, props;
+  type = element.type;
+  console.log(element)
+  props = element.props;
+  //debugger
+  let isReactComponent = type.isReactComponent;
+  
+  if (isReactComponent){
+      let componentInstance = new type(props);
+      element = componentInstance.render();
+      type = element.type;
+      props = element.props;
+  }
   if (typeof type === 'function') {
       element = type(props)
       type = element.type
