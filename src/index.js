@@ -1,5 +1,5 @@
-import React from "react";
-import ReactDom from "react-dom";
+import React from "./react";
+import ReactDom from "./react-dom";
 
 /**
  * 组件的状态
@@ -19,13 +19,13 @@ import ReactDom from "react-dom";
   *   在事件处理函数里setState的时候并不会直接修改状态，而是先把partialState放入一个数组(链表中)缓存起来， 等事件执行结束了，再统一进行更新
   */
 
-class Clock extends React.Component {
+class Counter extends React.Component {
   // state = { date: new Date() }  // 两种定义初始状态的方式
   constructor(props) {
     super(props); // this.props = props;
     this.state = { number: 0,  name: '计数器' }
   }
-  componentWillMount() {
+ /*  componentWillMount() {
     // 组件将要挂载
   }
 
@@ -34,7 +34,7 @@ class Clock extends React.Component {
     this.timer = setInterval(() => {
       this.setState({ date: new Date() });
     }, 1000);
-  }
+  } */
   /**
    * let updateQueue = []
    * updateQueue.push({number: this.state.number + 1})
@@ -48,25 +48,30 @@ class Clock extends React.Component {
       console.log(this.state.number)
     }) */
 
-    this.setState(prevState => ({number: prevState.number + 1 }), () => {
+    this.setState({ number: this.state.number + 1 , age: 18})
+    console.log(this.state.number)
+    this.setState({ number: this.state.number + 1})
+    console.log(this.state.number)
+    /* this.setState(prevState => ({number: prevState.number + 1 }), () => {
       console.log('3', this.state.number)
     })
     console.log('1', this.state.number)
     this.setState(prevState => ({number: prevState.number + 1 }), () => {
       console.log('4', this.state.number)
     })
-    console.log('2', this.state.number)
+    console.log('2', this.state.number) */
   }
   render() {
     return (
       <div>
-        <h1>{this.state.number} {this.state.name} {this.state.age} </h1>
-        <button onClick={this.handleClick}>+</button>
+        <h1>{this.state.number} : {this.state.name} </h1>
+        <button onClick={this.handleClick}></button>
+        <button onClick={this.handleClick}></button>
       </div>
     );
   }
 }
-ReactDom.render(<Clock />, document.getElementById("root"));
+ReactDom.render(<Counter/>, document.getElementById("root"));
 
 /**
  * 绑定事件的时候  虚拟DOM  JSX绑定和原生DOM不一样
